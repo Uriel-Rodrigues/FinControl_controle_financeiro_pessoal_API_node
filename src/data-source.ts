@@ -15,15 +15,16 @@ dotenv.config()
 
 //?? operador de coalescência nula - 
 // se o valor da esquerda for nulo sera usado o da direita 
-const type = process.env.DB_TYPE ?? "mysql"
+const type = process.env.DB_TYPE ?? "postgres" //"mysql"
 
 export const AppDataSource = new DataSource({
-    type: type as "mysql",
+    type: type as "postgres", //"mysql"
     host: process.env.DB_HOST!,
-    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 3306,
+    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432, //3306
     username: process.env.DB_USERNAME!, //username do banco
     password: process.env.DB_PASSWORD!, //senha do banco usado
     database: process.env.DB_DATABASE!, //nome do banco de dados
+    ssl: {rejectUnauthorized: false},
     synchronize: false,
     logging: true,
     entities: [Category, FinancialGoals, Transaction, User],

@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm"
 //importa a entidade users
 import { User } from "./Users"
 
@@ -16,7 +16,7 @@ export enum FinancialGoalsStatus {
     COMPLETED ="completed"
 }
 
-@Entity("financialGoals")
+@Entity("financialgoals")
 export class FinancialGoals {
     @PrimaryGeneratedColumn()
     id!: number
@@ -50,6 +50,7 @@ export class FinancialGoals {
     //relcaionamento ManyToOne com a tabela users
     //FiancialGoals 3----- user
     @ManyToOne(() => User, (user) => user.financialGoals)
+    @JoinColumn({ name: "usersId" })
     users!: User
 
 

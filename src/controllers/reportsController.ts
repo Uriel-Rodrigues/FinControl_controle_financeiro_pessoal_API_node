@@ -43,7 +43,7 @@ router.get("/transaction-report", verifyToken,  async(req: AuthRequest, res: Res
         const result = await transactionRepository
             .createQueryBuilder("transactions")
             .select([
-                `DATE_FORMAT(transactions.created_at, '%Y-%m') AS month`,
+                `TO_CHAR(transactions.created_at, 'YYYY-MM') AS month`,
                 `COUNT(transactions.id) AS transactions`
             ])
         //filtrar os registros para considerar apenas usuarios criados a partir da data nicial 
@@ -104,7 +104,7 @@ router.get("/financialGoals-report", verifyToken,  async(req: AuthRequest, res: 
         const result = await financialGoalsRepository
             .createQueryBuilder("financialgoals")
             .select([
-                `DATE_FORMAT(financialgoals.created_at, '%Y-%m') AS month`,
+                `TO_CHAR(financialgoals.created_at, 'YYYY-MM') AS month`,
                 `COUNT(financialgoals.id) AS financialGoals`
             ])
         //filtrar os registros para considerar apenas usuarios criados a partir da data nicial
